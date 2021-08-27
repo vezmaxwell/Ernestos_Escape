@@ -41,10 +41,10 @@ button:hover {
   color: rgb(230, 225, 65);
   text-shadow: 5px 5px rgba(230, 225, 65, 0.2);
 }
-/* 
+
 .title-screen-wrapper {
   display: none;
-} */
+}
 
 .title-screen {
   background-color: #5c94ab;
@@ -88,7 +88,7 @@ button:hover {
 }
 
 .shortCar {
-  background-color: pink;
+  background-color: red;
   background-size: 100%;
 }
 

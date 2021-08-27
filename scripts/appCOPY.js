@@ -6,7 +6,21 @@ function init(){
   const safeDen = [1, 3, 5, 7, 9]
 
   console.log(shortCarStart)
+  const playBtn = document.querySelector('.play-btn')
+  let gameTime = 120
+  let lives = 3
 
+
+// function to start the game on click of play button, title screen goes away
+  function startGame(){
+    document.querySelector('.title-screen-wrapper').style.display = 'none'
+    setInterval(() => {
+      gameTime--
+      console.log(gameTime)
+    }, 1000)
+  }
+
+  playBtn.addEventListener('click', startGame)
 
   //*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
   //* GRID ------
@@ -76,7 +90,7 @@ function init(){
 
 
 
-    // console.log(shortCarStart.map(el => el++))
+
 
     // for (let i = 0; i < shortCarStart.length; i++){
     //   shortCarStart = cells[shortCarStart[i + 1]]
@@ -92,9 +106,33 @@ function init(){
 
 
     function makeShortCar(){
+
+
       for (let i = 0; i < shortCarStart.length; i++)
-        cells[shortCarStart[i]].classList.add(shortCar)
+        cells[shortCarStart[i]].classList.add(shortCar)            // create first short car
+
+
+      setInterval(() => {
+        for (let i = 0; i < shortCarStart.length; i++)          
+          cells[shortCarStart[i]].classList.remove(shortCar)      // removes short car 
+
+
+        if (shortCarStart === shortCarStart[10, 21, 32, 43, 54, 65, 76, 87, 98]) {          // if statement to say if its any of these indices to - 10 instead
+          shortCarStart = shortCarStart.map(el => el -= 10)
+        } else
+          shortCarStart = shortCarStart.map(el => el += 1)          // adds 1 to index 
+
+        for (let i = 0; i < shortCarStart.length; i++)
+          cells[shortCarStart[i]].classList.add(shortCar)         // adds class of short car to new index 
+        console.log(shortCarStart)
+
+      }, 4000
+      )
+
     }
+
+    // console.log(shortCarStart.map(el => el += 1))
+
 
     // function moveShortCar(){
     //   for (let i = 0; i < shortCarStart.length; i++)
@@ -187,18 +225,20 @@ function init(){
   
   // playBtn.addEventListener('click', startGame)
 
-  const playBtn = document.querySelector('.play-btn')
-  let gameTime = 10
-  let lives = 3
+  // const playBtn = document.querySelector('.play-btn')
+  // let gameTime = 10
+  // let lives = 3
 
-  function startGame(){
-    document.querySelector('.title-screen-wrapper').style.display = 'none'
-    //add title screen later, display: none
-    setInterval(() => {
-      gameTime--
-      console.log(gameTime)
-    }, 1000)
-  }
+  // function startGame(){
+  //   document.querySelector('.title-screen-wrapper').style.display = 'none'
+  //   //add title screen later, display: none
+  //   setInterval(() => {
+  //     gameTime--
+  //     console.log(gameTime)
+  //   }, 1000)
+  // }
+
+  // playBtn.addEventListener('click', startGame)
   
   // if (gameTime < 0){
   //   clearInterval(gameTime)
@@ -209,7 +249,7 @@ function init(){
   //   console.log(gameTime)
   // }
   
-  playBtn.addEventListener('click', startGame)
+
 
   
   
@@ -296,3 +336,30 @@ function init(){
   //             // else display title screen      
   // }  // maybe i will set a time out that will reload the page if nothing happens for a minute
   
+
+
+
+
+
+
+
+
+
+
+
+  // function makeShortCar(){
+
+
+  //   for (let i = 0; i < shortCarStart.length; i++)
+  //     cells[shortCarStart[i]].classList.add(shortCar)
+
+  //   setInterval(() => {
+  //     for (let i = 0; i < shortCarStart.length; i++)
+  //       cells[shortCarStart[i]].classList.remove(shortCar)
+  //     shortCarStart = shortCarStart.map(el => el += 1)
+  //     for (let i = 0; i < shortCarStart.length; i++)
+  //       cells[shortCarStart[i]].classList.add(shortCar)
+
+  //   }, 2000
+  //   )
+  // }
