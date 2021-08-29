@@ -43,7 +43,7 @@ button:hover {
 }
 
 .title-screen-wrapper {
-  display: none;
+
 }
 
 .title-screen {
@@ -59,7 +59,7 @@ button:hover {
 }
 
 .grid-wrapper {
-  height: 100vh;
+  height: 85vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,11 +88,32 @@ button:hover {
 }
 
 .shortCar {
-  background-color: red;
+  background-color: rgb(155, 89, 100);
   background-size: 100%;
 }
 
 .longCar {
   background-color: olivedrab;
   background-size: 100%;
+}
+
+.time-bar {
+  height: 40px;
+  width: 30%;
+  background-color: lightgrey;
+  border-radius: 10px;
+}
+
+.time-remaining {
+  height: 100%;
+  width: 0%;
+  background-color: black;
+  border-radius: 10px 0  0 10px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+  transition: width .5s, border-radius 0.2s ease 0.2s;
+}
+
+footer {
+  display: flex;
+  justify-content: space-evenly;
 }
