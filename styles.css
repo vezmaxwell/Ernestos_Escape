@@ -2,60 +2,68 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Press Start 2P', cursive;}
+  font-family: 'Ultra', serif;
+  letter-spacing: 5px;
+  color: #592525;
+}
 
 body {
   height: 100vh;
+  background-color: rgb(147, 241, 255);
 }
 
 header, footer {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  margin-top: 30px;
+  padding: 15px;
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 60px;
   text-shadow: 2px 2px ;
-  color: #e3e3e3;
-  text-shadow: 5px 5px black;
+  color: #3c6722;
+  text-shadow: 5px 5px rgba(173, 255, 91, 0.6);
 }
 
 button {
   font-size: 30px;
-  padding: 30px 100px;
+  padding: 20px 100px;
   text-transform: uppercase;
-  border: 10px solid #322f2f;
+  border: 10px solid #000000;
   cursor: pointer;
-  background-color: #83cbe3;
-  color: #e3e3e3;
-  text-shadow: 5px 5px rgb(103,103,103, 0.7)
-  ;
+  background-color: #3d6522;
+  color: #592525;
+  /* text-shadow: 5px 5px rgba(255, 255, 255, 0.379); */
+  margin: 60px;
+  border-radius: 50px;
+  font-size: 40px;
 }
 
 button:hover {
   background-color: rgb(131,203,227, 0.8);
   border: 10px solid rgb(81,83,83, 0.8);
   box-shadow: 0px 0px 15px 15px rgba(145, 174, 203, 0.6);
-  color: rgb(230, 225, 65);
+  color: rgb(234, 164, 194);
   text-shadow: 5px 5px rgba(230, 225, 65, 0.2);
 }
 
-.title-screen-wrapper {
 
-}
-
-.title-screen {
-  background-color: #5c94ab;
+.title-screen, .final-screen {
+  /* background-color: #5c94ab; */
+  background-image: url(assets/Pictures/home\ screen\ bk.gif);
+  background-size: 100%;
   height: 800px;
   width: 800px;
   position: relative;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  padding-top: 90px;
   align-items: center;
   flex-direction: column;
   box-shadow: 10px -7px 5px rgb(153,158,158, 0.6);
+  border: 10px solid #000000;
+  border-radius: 50px;
 }
 
 .grid-wrapper {
@@ -66,52 +74,75 @@ button:hover {
 }
 
 .grid {
+  background-image: url(assets/Pictures/background.jpg);
+  background-size: 100%;
   display: flex;
   flex-wrap: wrap;
   height: 800px;
   width: 800px;
   position: absolute;
-  z-index: -1;
+  z-index: -2;
+  border: 10px solid #000000;
+  border-radius: 50px;
 }
 
 .grid div {
   width: 9%;
   height: 9%;
-  border: 1px solid black;
   margin: 0px;
   padding: 0px;
 }
 
 .octopus {
-  background-image: url(assets/ernestov1.GIF);
+  background-image: url(assets/Pictures/ernesto.GIF);
   background-size: 100%;
+  z-index: 100px;
 }
 
 .shortCar {
+  /* background-image: url(assets/Pictures/obstacle.gif); */
   background-color: rgb(155, 89, 100);
+  background-size: 100%;
+  z-index: -1;
+}
+
+.shortSafe {
+  background-color: darkgreen;
   background-size: 100%;
 }
 
 .longCar {
-  background-color: olivedrab;
+  /* background-image: url(assets/Pictures/obstacle\ 2.gif); */
+  background-color: coral;
+  /* background-image: url(); */
   background-size: 100%;
 }
+
+.longSafe {
+  background-color: darkmagenta;
+  background-size: 100%;
+}
+
 
 .time-bar {
   height: 40px;
   width: 30%;
-  background-color: lightgrey;
+  background-color: #934c30;
   border-radius: 10px;
 }
 
 .time-remaining {
   height: 100%;
-  width: 0%;
-  background-color: black;
-  border-radius: 10px 0  0 10px;
+  width: 100%;
+  background-color: #516c15;
+  border-radius: 10px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
   transition: width .5s, border-radius 0.2s ease 0.2s;
 }
+
+/* .safeDenClass {
+  background-color: orange;
+} */
 
 footer {
   display: flex;
