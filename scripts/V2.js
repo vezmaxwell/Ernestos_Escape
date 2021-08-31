@@ -262,6 +262,7 @@ function init(){
       
       setInterval(() => {
         removeLongcars()
+        removeSafeLong()
         longCarStart = longCarStart.map(el => {
           if (el % 11 === 10) {
             return el = el - 11
@@ -279,21 +280,21 @@ function init(){
 
       addSafeLong()
 
-      setInterval(() => {
-        removeLongcars()
-        longSafeStart = longSafeStart.map(el => {
-          if (el % 11 === 10) {
-            return el = el - 11
-          } else {
-            return el
-          }
-        })
+      // setInterval(() => {
+      //   removeLongcars()
+      //   longSafeStart = longSafeStart.map(el => {
+      //     if (el % 11 === 10) {
+      //       return el = el - 11
+      //     } else {
+      //       return el
+      //     }
+      //   })
 
-        removeSafeLong()
-        longSafeStart = longSafeStart.map(el => el += 1)
-        addSafeLong()
-        checkCollision()
-      }, 2000)
+      //   removeSafeLong()
+      //   longSafeStart = longSafeStart.map(el => el += 1)
+      //   addSafeLong()
+      //   checkCollision()
+      // }, 2000)
     }
   
     moveShortCars()

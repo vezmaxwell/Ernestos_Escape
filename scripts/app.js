@@ -8,8 +8,9 @@ function init(){
 //*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
 //* global variables ----------------------
 
-  let shortCarStart = [12, 15, 18, 21, 35, 38, 41, 56, 59, 62, 65, 79, 82, 85]
+  let shortCarStart = [56, 59, 62, 65, 79, 82, 85]
   let longCarStart = [24, 25, 30, 31, 68, 69, 74, 75]
+  let shortSafeStart = [12, 15, 18, 21, 35, 38, 41]
 
   // console.log(safeDen)
 
@@ -22,22 +23,6 @@ function init(){
   let gameTime = 120
   let lives = 10
 
-  // console.log(lives)
-//*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
-
-// let timeRemaining = document.querySelector('.time-remaining')
-
-// function timeBar(){
-//   if (gameTime){
-//   timeRemaining = timeRemaining.style.width = 100%
-//   } else {
-//     timeRemaining.style.width = `${(gameTime) * 100}%`
-//   }
-//   // } else if (gameTime < 120){
-//   // timeRemaining.style.width = `${(gameTime) * 100}%`
-//   // }
-// }
-// }
 
 //*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
 
@@ -50,11 +35,8 @@ function init(){
   }
 
 
-
-
 //*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
 
-// function to start the game on click of play button, title screen goes away
   const titleScreen = document.querySelector('.title-screen-wrapper')
   const title = document.querySelector('.title')
 
@@ -65,15 +47,19 @@ function init(){
     
     titleScreen.style.display = 'none'
 
-    if (gameTime <= 120){
+    if (gameTime > 0){
       setInterval(() => {
         updateTime()
         gameTime--
         console.log(gameTime)
       }, 1000)
-    } else if (gameTime <= 0){
-      location.reload()                       //change to game ends when it's working
+
+      setTimeout(() => {
+        looseScreen()
+      }, 120000)
     }
+    
+  
 
 
     //*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
@@ -84,26 +70,11 @@ function init(){
     const width = 9
     const height = 11
     const cellCount = width * height
-    console.log(cellCount)
     const cells = []
     const water = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43]
-    
-    // water.forEach(cell => cell.classList.add(watercell))
-
     const land = [55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87]
-    console.log(water)
-
-
     const safeDen = [1, 3, 5, 7, 9]
-    // const safeDenClass = 'safeDenClass'
 
-    // safeDen.forEach(el => el.classList.add(safeDenClass))
-
-    // console.log(cells.slice(11, 43))
-    // console.log('water', water)
-    // console.log('cells', cells)
-    // console.log('cellsARR', [78, 99])
-  
     const octopus = 'octopus'
     const startingPosition = 93                 // game starting position bottom of screen 
     let currentPosition = startingPosition
@@ -172,21 +143,26 @@ function init(){
           scoreTotal.innerHTML = score
           currentPosition = startingPosition   
           addOctopus(startingPosition)                   // add new octopus back to starting position, need to work out how to take control of the new one instead 
-        } 
+        } else if (safe > 4){
+          winScreen()
+        }
+        
       }
-    
-      safeOctopus()
-
-
-
       
+      safeOctopus()
     }
   
-  
+    
     document.addEventListener('keydown', movement)
 
     createGrid(startingPosition)
-  
+    //*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
     
     //* functions to create and move cars
     //*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -197,49 +173,79 @@ function init(){
   
       function addShortCar(){                                               // function to add short car
         for (let i = 0; i < shortCarStart.length; i++)
-          cells[shortCarStart[i]].classList.add(shortCar)            
-      }
-  
+          cells[shortCarStart[i]].classList.add(shortCar)
+      } 
+
       function removeShortCar(){
         for (let i = 0; i < shortCarStart.length; i++)                      // function to remove short car
           cells[shortCarStart[i]].classList.remove(shortCar)
       }
   
-      addShortCar()                                                         // create first short car
+      addShortCar()               
       
       setInterval(() => {                                                   // setting interval for cars to move
         removeShortCar()
-        shortCarStart = shortCarStart.map(el => {                           // mapping through array, if arary meets condition sends car back to start of row
+        
+        shortCarStart = shortCarStart.map(el => {                           // mapping through array, if array meets condition sends car back to start of row
           if (el % 11 === 0) {
             return el = el + 11
-          // console.log(shortCarStart.indexof(el))
           } else {
             return el
-          }
+          } 
         })
-  
-        removeShortCar()                                            // removes short car if it does meet condition
+
+        removeShortCar()    
         shortCarStart = shortCarStart.map(el => el -= 1)            // adds 1 to index 
         addShortCar()                                               // adds class of short car to new index 
         checkCollision()
 
-        
       }, 2000                                                         // moving every 2 seconds 
       )
     }
 
-//*------------------------------------------------------------------------
+    //*------------------------------------------------------------------------
 
-    function moveErnesto(){
-      setInterval(() => {
-        removeOctopus(currentPosition)
-        addOctopus(currentPosition++)
-      }, 2000)
+    const shortSafe = 'shortSafe'
+
+    function moveShortSafeCars() {
+  
+      function addSafeCar(){
+        console.log(shortSafeStart)
+        for (let i = 0; i < shortSafeStart.length; i++)
+          cells[shortSafeStart[i].classList.add(shortSafe)]
+      }
+
+      function removeSafeCar(){
+        for (let i = 0; i < shortSafeStart.length; i++)
+          cells[shortSafeStart[i].classList.remove(shortSafe)]
+      }
+
+      addSafeCar()
+
+      // setInterval(() => {
+      //   removeSafeCar()
+
+      //   shortSafeStart = shortSafeStart.map(el => {
+      //     if (el % 11 === 0){
+      //       return el = el + 11
+      //     } else {
+      //       return el
+      //     }
+      //   })
+
+      //   removeSafeCar()
+      //   shortSafeStart = shortSafeStart.map(el => el -= 1)
+      //   addSafeCar()
+      //   checkCollision()
+      // }, 2000)
+
+      // console.log('where am')
     }
 
 
+
   
-//*------------------------------------------------------------------------
+    //*------------------------------------------------------------------------
 
     function moveLongCars() {
   
@@ -275,66 +281,69 @@ function init(){
   
     moveShortCars()
     moveLongCars()
-  
-    //*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
-    //* TRYING TO MAKE OCTOPUS MOVE WITH THE LOGS :(
-
-    // function moveOctopusRight(){
-    //   setTimeout(() => {
-    //     removeOctopus(currentPosition)                          // trying to make octopus move right with the cars, this is being called in the collision function 
-    //     currentPosition += 1
-    //     addOctopus(currentPosition)
-    //   }, 2000)
-      
-      // if (currentPosition % 11 === 10){
-      //   looseLife()
-      // } else {
-      //   return
-      // }
-    
-
-
-
-
-
-
-
-
+    moveShortSafeCars()
 
 
     //*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
     //* function for what happens when you loose a life or get to the top
     
-    function checkCollision(){
-      const sameIndexLong = longCarStart.some(el => el  === currentPosition)          // checks to see for any instance of current position being same as long cars
+    let isInSquareBefore = false
+    let isInSquareAfter = false 
+
+    function checkCollision() {
+      const sameIndexLong = longCarStart.some(el => el === currentPosition)                 // checks to see for any instance of current position being same as long cars
+
       const sameIndexShort = shortCarStart.some(el => el === currentPosition)         // checks to see for any instance of current position being same as short cars
+      const sameIndexShortForWater = shortSafeStart.some(el => el === currentPosition - 1)         // checks to see for any instance of current position being same as short cars
+      const sameIndexLongForWater = longCarStart.some(el => el === currentPosition + 1)
       const onLand = land.some(el => el === currentPosition)
       const onWater = water.some(el => el === currentPosition)
 
 
-      if (onLand){  
-        console.log('onland')                                                         
-        if ((sameIndexLong) || (sameIndexShort)){
+      if (onLand) {
+        console.log('onland')
+        if ((sameIndexLong) || (sameIndexShort)) {
           console.log('Oh shit')
           looseLife()
         }
 
-      } else if (onWater){
+      } else if (onWater) {
         console.log('onwater')
-        if ((sameIndexShort)){
-          console.log('floaty boi')
-        } else if ((sameIndexLong)){
-          console.log('floaty boi')
-          // moveErnesto() 
+        if ((sameIndexShort)) {
+          removeOctopus(currentPosition)
+          console.log('move meh', sameIndexShort)
+          addOctopus(currentPosition)
+          isInSquareBefore = true
+
+        } else if ((sameIndexLong)) {
+          removeOctopus(currentPosition)
+          console.log('move meh', sameIndexLong)
+          addOctopus(currentPosition)
+          isInSquareAfter = true
+
+        } else if ((sameIndexShortForWater && isInSquareBefore === true)) {
+          console.log('floaty boi', isInSquareBefore)
+          removeOctopus(currentPosition)
+          currentPosition = currentPosition -= 1
+          addOctopus(currentPosition)
+
+        } else if ((sameIndexLongForWater && isInSquareBefore === true)) {
+          console.log('floaty boi', isInSquareBefore)
+          removeOctopus(currentPosition)
+          currentPosition = currentPosition += 1
+          addOctopus(currentPosition)
+
         } else {
-          console.log('drown town')
+          console.log('drown town', isInSquareBefore)
           looseLife()
         }
       } else {
-        return 
+        return
       }
     }
   
+
+
   
     function looseLife(){
   
@@ -351,51 +360,33 @@ function init(){
     }
   }
 
-
-
-  playBtn.addEventListener('click', startGame)
-
-  
-
   function looseScreen(){
     titleScreen.style.display = ''
     title.innerHTML = 'YOU DIED!'
-    playBtn.addEventListener('click', location.reload())            // auto clicking??!??!?!??!
-  }
+    playBtn.innerHTML = 'Try Again?'
+    playBtn.addEventListener('click', reset)
 
+  }
 
   function winScreen(){
-    if (safe >= 5){
-      titleScreen.style.display = ''
-      title.innerHTML = 'ERNESTO IS SAFE!'
-      playBtn.innerHTML = 'Play Again?'
-      playBtn.addEventListener('click', location.reload()) 
-    } else {
-      return 
-    }
+    titleScreen.style.display = ''
+    title.innerHTML = 'ERNESTO IS SAFE!'
+    playBtn.innerHTML = 'Play Again?'
+    playBtn.addEventListener('click', reset)
+  }
+
+  function reset(){
+    location.reload()
   }
   
-  winScreen()
-
-
-
-  
-  //*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
-
-
 
 
   //*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
   //* gameEnds - this is what happens when the game ends. this is where i will edit the innerHTML dependent on how they got there
 
-  
-  function gameOver(){
-    
-  }
 
 
-
-
+  playBtn.addEventListener('click', startGame)
 
 
 

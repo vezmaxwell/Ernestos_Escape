@@ -34,7 +34,6 @@ button {
   cursor: pointer;
   background-color: #3d6522;
   color: #592525;
-  /* text-shadow: 5px 5px rgba(255, 255, 255, 0.379); */
   margin: 60px;
   border-radius: 50px;
   font-size: 40px;
@@ -50,7 +49,6 @@ button:hover {
 
 
 .title-screen, .final-screen {
-  /* background-color: #5c94ab; */
   background-image: url(assets/Pictures/home\ screen\ bk.gif);
   background-size: 100%;
   height: 800px;
@@ -100,10 +98,8 @@ button:hover {
 }
 
 .shortCar {
-  /* background-image: url(assets/Pictures/obstacle.gif); */
   background-color: rgb(155, 89, 100);
   background-size: 100%;
-  z-index: -1;
 }
 
 .shortSafe {
@@ -112,9 +108,7 @@ button:hover {
 }
 
 .longCar {
-  /* background-image: url(assets/Pictures/obstacle\ 2.gif); */
   background-color: coral;
-  /* background-image: url(); */
   background-size: 100%;
 }
 
@@ -122,7 +116,6 @@ button:hover {
   background-color: darkmagenta;
   background-size: 100%;
 }
-
 
 .time-bar {
   height: 40px;
@@ -139,10 +132,6 @@ button:hover {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
   transition: width .5s, border-radius 0.2s ease 0.2s;
 }
-
-/* .safeDenClass {
-  background-color: orange;
-} */
 
 footer {
   display: flex;
