@@ -111,7 +111,7 @@ function init(){
     function createGrid(startPos){
       for (let i = 0; i < cellCount; i++){
         const cell = document.createElement('div')
-        // cell.innerText = i
+        cell.innerText = i
         grid.appendChild(cell)
         cells.push(cell)
       }
@@ -230,12 +230,12 @@ function init(){
 
 //*------------------------------------------------------------------------
 
-// function moveErnesto(){
-//   setInterval(() => {
-//     removeOctopus(currentPosition)
-//     addOctopus(currentPosition++)
-//   }, 2000)
-// }
+    function moveErnesto(){
+      setInterval(() => {
+        removeOctopus(currentPosition)
+        addOctopus(currentPosition++)
+      }, 2000)
+    }
 
 
   
@@ -325,7 +325,7 @@ function init(){
           console.log('floaty boi')
         } else if ((sameIndexLong)){
           console.log('floaty boi')
-          // moveOctopusRight() 
+          // moveErnesto() 
         } else {
           console.log('drown town')
           looseLife()
