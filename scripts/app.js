@@ -1,19 +1,36 @@
 
 function init(){
 
-  const audio = document.querySelector('#audio')
+  const soundtrackAudio = document.querySelector('#soundtrackAudio')
 
-  
+  function playMusic() {
+    soundtrackAudio.src = 'assets/soundtrack.mp3'
+    soundtrackAudio.play()
+  }
+
+
+  const safeAudio = document.querySelector('#safeAudio')
+
+  function playSafeAudio(){
+    safeAudio.src = 'assets/safeaudio.wav'
+    safeAudio.play()
+  }
+
+
+  const looseAudio = document.querySelector('#looseAudio')
+
+  function playLooseAudio(){
+    looseAudio.src = 'assets/loose.wav'
+    looseAudio.play()
+  }
 
 //*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
 //* global variables ----------------------
 
-  let shortCarStart = [56, 59, 62, 65, 79, 82, 85]
-  let longCarStart = [24, 25, 30, 31, 68, 69, 74, 75]
-  let shortSafeStart = [12, 15, 18, 21, 35, 38, 41]
-
-  // console.log(safeDen)
-
+  let shortCarStart = [56, 59, 62, 65, 79, 81, 83, 85, 87]
+  let longCarStart = [66, 67, 70, 71, 74, 75]
+  let shortSafeStart = [12, 15, 18, 21, 33, 36, 39, 41]
+  let longSafeStart = [23, 24, 27, 28, 31, 32]
 
   const playBtn = document.querySelector('.play-btn')
   const livesTotal = document.querySelector('.lives')
@@ -23,16 +40,9 @@ function init(){
   let gameTime = 120
   let lives = 10
 
-
 //*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
 
   const timeBar = document.querySelector('.time-remaining')
-
-  function updateTime(){
-    if (gameTime <= 120){
-      timeBar.style.width = `${gameTime / 120 * 100}%`
-    }
-  }
 
 
 //*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
@@ -43,18 +53,27 @@ function init(){
 
   function startGame(){
     
-    audio.play()
+
+    function updateTime(){
+      if ((gameTime <= 120) && (safe >= 5 || lives > 0)){                     // test this
+        timeBar.style.width = `${gameTime / 120 * 100}%`
+      }
+    }
+
+    playMusic()
     
     titleScreen.style.display = 'none'
 
+    
     if (gameTime > 0){
       setInterval(() => {
         updateTime()
         gameTime--
-        console.log(gameTime)
       }, 1000)
 
       setTimeout(() => {
+        gameTime === 0
+        playLooseAudio()
         looseScreen()
       }, 120000)
     }
@@ -82,7 +101,7 @@ function init(){
     function createGrid(startPos){
       for (let i = 0; i < cellCount; i++){
         const cell = document.createElement('div')
-        cell.innerText = i
+        // cell.innerText = i
         grid.appendChild(cell)
         cells.push(cell)
       }
@@ -98,10 +117,7 @@ function init(){
   
     function removeOctopus(position){
       cells[position].classList.remove(octopus) 
-      // console.log(currentPosition)                              // this is showing that the class is removed but it is still added to the one above
     }
-
-
 
   
     //*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
@@ -118,28 +134,31 @@ function init(){
     
       if (key === right && currentPosition % height !== height - 1){
         currentPosition++ 
+        score += 10
       } else if (key === left && currentPosition % height !== 0){
         currentPosition--
+        score += 10
       } else if (key === up && currentPosition >= width){
         currentPosition -= height
+        score += 10
       } else if (key === down && currentPosition + width <= cellCount - 1){
         currentPosition += height
+        score += 10
       } else {
         console.log('invalid')
       }
-  
-      console.log('score', score)
+      
+      updateScore()
       addOctopus(currentPosition)
       checkCollision() 
-      // console.log(currentPosition)
       
       //* ----------- score for octopus  
       function safeOctopus(){
         const home = safeDen.some(el => el === currentPosition)
         if (home){
+          playSafeAudio()
           score += 100
           safe += 1
-          console.log('SAFE SAFE', safe)
           scoreTotal.innerHTML = score
           currentPosition = startingPosition   
           addOctopus(startingPosition)                   // add new octopus back to starting position, need to work out how to take control of the new one instead 
@@ -148,6 +167,15 @@ function init(){
         }
         
       }
+
+      function updateScore(){
+        if (lives > 0){
+          scoreTotal.innerHTML = score
+        } else {
+          return 
+        }
+      }
+
       
       safeOctopus()
     }
@@ -156,132 +184,134 @@ function init(){
     document.addEventListener('keydown', movement)
 
     createGrid(startingPosition)
-    //*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
     
     //* functions to create and move cars
     //*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     const shortCar = 'shortCar'
-    const longCar = 'longCar' 
-  
+    const longCar = 'longCar'
+    const shortSafe = 'shortSafe'
+    const longSafe = 'longSafe'
+
     function moveShortCars() {
-  
-      function addShortCar(){                                               // function to add short car
+
+      function addShortCar() {                                               // function to add short car
+        for (let i = 0; i < shortSafeStart.length; i++)
+          cells[shortSafeStart[i]].classList.add(shortSafe)
+      }
+
+      function addLandCar() {
         for (let i = 0; i < shortCarStart.length; i++)
           cells[shortCarStart[i]].classList.add(shortCar)
-      } 
+      }
 
-      function removeShortCar(){
+      function removeShortCar() {
+        for (let i = 0; i < shortSafeStart.length; i++)                      // function to remove short car
+          cells[shortSafeStart[i]].classList.remove(shortSafe)
+      }
+      function removeLandCar() {
         for (let i = 0; i < shortCarStart.length; i++)                      // function to remove short car
           cells[shortCarStart[i]].classList.remove(shortCar)
       }
-  
-      addShortCar()               
-      
+
+      addShortCar()
+      addLandCar()
+
       setInterval(() => {                                                   // setting interval for cars to move
         removeShortCar()
-        
-        shortCarStart = shortCarStart.map(el => {                           // mapping through array, if array meets condition sends car back to start of row
+        removeLandCar()
+
+        shortSafeStart = shortSafeStart.map(el => {                           // mapping through array, if array meets condition sends car back to start of row
           if (el % 11 === 0) {
             return el = el + 11
           } else {
             return el
-          } 
+          }
         })
 
-        removeShortCar()    
-        shortCarStart = shortCarStart.map(el => el -= 1)            // adds 1 to index 
-        addShortCar()                                               // adds class of short car to new index 
+        shortCarStart = shortCarStart.map(el => { 
+
+          if (el % 11 === 0) {
+            return el = el + 11
+          } else {
+            return el
+          }
+        })
+
+        removeLandCar()
+        removeShortCar()
+        shortSafeStart = shortSafeStart.map(el => el -= 1)            // adds 1 to index 
+        shortCarStart = shortCarStart.map(el => el -= 1)  
+        addShortCar()   
+        addLandCar()                                            // adds class of short car to new index 
         checkCollision()
 
       }, 2000                                                         // moving every 2 seconds 
       )
     }
 
-    //*------------------------------------------------------------------------
-
-    const shortSafe = 'shortSafe'
-
-    function moveShortSafeCars() {
-  
-      function addSafeCar(){
-        console.log(shortSafeStart)
-        for (let i = 0; i < shortSafeStart.length; i++)
-          cells[shortSafeStart[i].classList.add(shortSafe)]
-      }
-
-      function removeSafeCar(){
-        for (let i = 0; i < shortSafeStart.length; i++)
-          cells[shortSafeStart[i].classList.remove(shortSafe)]
-      }
-
-      addSafeCar()
-
-      // setInterval(() => {
-      //   removeSafeCar()
-
-      //   shortSafeStart = shortSafeStart.map(el => {
-      //     if (el % 11 === 0){
-      //       return el = el + 11
-      //     } else {
-      //       return el
-      //     }
-      //   })
-
-      //   removeSafeCar()
-      //   shortSafeStart = shortSafeStart.map(el => el -= 1)
-      //   addSafeCar()
-      //   checkCollision()
-      // }, 2000)
-
-      // console.log('where am')
-    }
-
-
-
-  
+    //*------------------------------------------------------------------------  
     //*------------------------------------------------------------------------
 
     function moveLongCars() {
-  
-      function addLongCars(){
-        for (let i = 0; i < longCarStart.length; i++)
-          cells[longCarStart[i]].classList.add(longCar)             // function for creating long cars 
+
+      function addLongCar() {                                               // function to add short car
+        for (let i = 0; i < longSafeStart.length; i++)
+          cells[longSafeStart[i]].classList.add(longSafe)
       }
-  
-      function removeLongcars(){
+
+      function addLongLandCar() {
         for (let i = 0; i < longCarStart.length; i++)
+          cells[longCarStart[i]].classList.add(longCar)
+      }
+
+      function removeLongCar() {
+        for (let i = 0; i < longSafeStart.length; i++)                      // function to remove short car
+          cells[longSafeStart[i]].classList.remove(longSafe)
+      }
+
+      function removeLongLandCar() {
+        for (let i = 0; i < longCarStart.length; i++)                      // function to remove short car
           cells[longCarStart[i]].classList.remove(longCar)
       }
 
-      addLongCars()                                                // create first long car
-      
-      setInterval(() => {
-        removeLongcars()
-        longCarStart = longCarStart.map(el => {
+      addLongCar()
+      addLongLandCar()
+
+      setInterval(() => {                                                   // setting interval for cars to move
+        removeLongCar()
+        removeLongLandCar()
+
+        longSafeStart = longSafeStart.map(el => {                           // mapping through array, if array meets condition sends car back to start of row
           if (el % 11 === 10) {
             return el = el - 11
           } else {
             return el
           }
         })
-  
-        removeLongcars()                                        // removes long car 
-        longCarStart = longCarStart.map(el => el += 1)          // adds 1 to index
-        addLongCars()                                          // create long car at new index 
-        checkCollision()                                        // calling check collision here as well so it checks for both the car and the octopus !
-      }, 2000
+
+        longCarStart = longCarStart.map(el => { 
+
+          if (el % 11 === 10) {
+            return el = el - 11
+          } else {
+            return el
+          }
+        })
+
+        removeLongLandCar()
+        removeLongCar()
+        longSafeStart = longSafeStart.map(el => el += 1)            // adds 1 to index 
+        longCarStart = longCarStart.map(el => el += 1)  
+        addLongCar()   
+        addLongLandCar()                                            // adds class of short car to new index 
+        checkCollision()
+
+      }, 2000                                                         // moving every 2 seconds 
       )
     }
   
     moveShortCars()
     moveLongCars()
-    moveShortSafeCars()
 
 
     //*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
@@ -291,69 +321,78 @@ function init(){
     let isInSquareAfter = false 
 
     function checkCollision() {
-      const sameIndexLong = longCarStart.some(el => el === currentPosition)                 // checks to see for any instance of current position being same as long cars
+      const sameIndexLong = longCarStart.some(el => el === currentPosition)                          // checks to see for any instance of current position being same as long cars
+      const sameIndexShort = shortCarStart.some(el => el === currentPosition)                       // checks to see for any instance of current position being same as short cars
+     
+      const sameIndexShortB = shortSafeStart.some(el => el === currentPosition)
+      const sameIndexLongB = longSafeStart.some(el => el === currentPosition)
 
-      const sameIndexShort = shortCarStart.some(el => el === currentPosition)         // checks to see for any instance of current position being same as short cars
       const sameIndexShortForWater = shortSafeStart.some(el => el === currentPosition - 1)         // checks to see for any instance of current position being same as short cars
-      const sameIndexLongForWater = longCarStart.some(el => el === currentPosition + 1)
+      const sameIndexLongForWater = longSafeStart.some(el => el === currentPosition + 1)
       const onLand = land.some(el => el === currentPosition)
       const onWater = water.some(el => el === currentPosition)
 
-
       if (onLand) {
-        console.log('onland')
+        // console.log('onland')
+
         if ((sameIndexLong) || (sameIndexShort)) {
-          console.log('Oh shit')
           looseLife()
         }
 
       } else if (onWater) {
         console.log('onwater')
-        if ((sameIndexShort)) {
+
+        if (sameIndexShortB) {
           removeOctopus(currentPosition)
-          console.log('move meh', sameIndexShort)
           addOctopus(currentPosition)
           isInSquareBefore = true
+          console.log('move meh short', isInSquareBefore)
+          return isInSquareBefore
 
-        } else if ((sameIndexLong)) {
+        } else if (sameIndexLongB) {
           removeOctopus(currentPosition)
-          console.log('move meh', sameIndexLong)
           addOctopus(currentPosition)
           isInSquareAfter = true
+          console.log('move meh long', isInSquareAfter)
+          return isInSquareAfter
 
         } else if ((sameIndexShortForWater && isInSquareBefore === true)) {
-          console.log('floaty boi', isInSquareBefore)
           removeOctopus(currentPosition)
           currentPosition = currentPosition -= 1
-          addOctopus(currentPosition)
-
-        } else if ((sameIndexLongForWater && isInSquareBefore === true)) {
           console.log('floaty boi', isInSquareBefore)
+          addOctopus(currentPosition)
+          return
+
+        } else if ((sameIndexLongForWater && isInSquareAfter === true)) {
           removeOctopus(currentPosition)
           currentPosition = currentPosition += 1
+          console.log('floaty boi', isInSquareBefore)
           addOctopus(currentPosition)
-
+          return
+        
         } else {
-          console.log('drown town', isInSquareBefore)
           looseLife()
+          isInSquareBefore = false
+          console.log('drown town', isInSquareBefore)
+          return isInSquareBefore
         }
+
       } else {
         return
       }
     }
-  
-
 
   
     function looseLife(){
   
       if (lives >= 1){
+        playLooseAudio()
         lives -= 1
         livesTotal.innerHTML = `Lives: ${lives}`
         removeOctopus(currentPosition)
         currentPosition = startingPosition
         addOctopus(startingPosition)
-        console.log('loose 1 life, lives:', lives)
+        // console.log('loose 1 life, lives:', lives)
       } else {
         looseScreen()
       }
@@ -361,17 +400,17 @@ function init(){
   }
 
   function looseScreen(){
+    // titleScreen.style.backgroundImage = 'url(assets/Pictures/loosescreen.gif)'
     titleScreen.style.display = ''
     title.innerHTML = 'YOU DIED!'
     playBtn.innerHTML = 'Try Again?'
     playBtn.addEventListener('click', reset)
-
   }
 
   function winScreen(){
     titleScreen.style.display = ''
     title.innerHTML = 'ERNESTO IS SAFE!'
-    playBtn.innerHTML = 'Play Again?'
+    playBtn.innerHTML = 'Reset Game?'
     playBtn.addEventListener('click', reset)
   }
 
