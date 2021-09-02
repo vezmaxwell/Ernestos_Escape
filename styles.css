@@ -84,6 +84,11 @@ button:hover {
   border-radius: 50px;
 }
 
+#loosescreen {
+  background-image: url(assets/Pictures/loosescreen.gif);
+  background-size: 100%;
+}
+
 
 
 .grid-wrapper {
@@ -95,7 +100,7 @@ button:hover {
 
 .grid {
   background-image: url(assets/Pictures/sandborder.png);
-  background-color: rgb(116, 172, 205, 0.4);
+  background-color: rgba(78, 145, 184, 0.77);
   background-size: 100%;
   display: flex;
   flex-wrap: wrap;

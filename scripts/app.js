@@ -30,7 +30,7 @@ function init(){
   let shortCarStart = [56, 59, 62, 65, 79, 81, 83, 85, 87]
   let longCarStart = [66, 67, 70, 71, 74, 75]
   let shortSafeStart = [12, 15, 18, 21, 33, 36, 39, 41]
-  let longSafeStart = [23, 24, 27, 28, 31, 32]
+  let longSafeStart = [23, 24, 27, 28, 30, 31]
 
   const playBtn = document.querySelector('.play-btn')
   const livesTotal = document.querySelector('.lives')
@@ -62,8 +62,9 @@ function init(){
 
     playMusic()
     
-    titleScreen.style.display = 'none'
 
+    titleScreen.style.display = 'none'
+    titleScreen.style.backgroundImage = 'none'
     
     if (gameTime > 0){
       setInterval(() => {
@@ -323,7 +324,7 @@ function init(){
     function checkCollision() {
       const sameIndexLong = longCarStart.some(el => el === currentPosition)                          // checks to see for any instance of current position being same as long cars
       const sameIndexShort = shortCarStart.some(el => el === currentPosition)                       // checks to see for any instance of current position being same as short cars
-     
+
       const sameIndexShortB = shortSafeStart.some(el => el === currentPosition)
       const sameIndexLongB = longSafeStart.some(el => el === currentPosition)
 
@@ -336,6 +337,7 @@ function init(){
         // console.log('onland')
 
         if ((sameIndexLong) || (sameIndexShort)) {
+          score -= 50
           looseLife()
         }
 
@@ -384,7 +386,6 @@ function init(){
 
   
     function looseLife(){
-  
       if (lives >= 1){
         playLooseAudio()
         lives -= 1
@@ -400,8 +401,9 @@ function init(){
   }
 
   function looseScreen(){
-    // titleScreen.style.backgroundImage = 'url(assets/Pictures/loosescreen.gif)'
+    // titleScreen.id = 'loosescreen'
     titleScreen.style.display = ''
+    titleScreen.style.backgroundImage = 'url(assets/Pictures/loosescreen.gif)'
     title.innerHTML = 'YOU DIED!'
     playBtn.innerHTML = 'Try Again?'
     playBtn.addEventListener('click', reset)
