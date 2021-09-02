@@ -9,13 +9,12 @@
 
 body {
   height: 100vh;
-  /* background-color: rgb(147, 241, 255); */
 }
 
 body {
-  background: linear-gradient(-45deg, #810d60, #85497b, #4a1241);
+  background: linear-gradient(-45deg, #ff00b7, #234394, #4a1241);
   background-size: 400% 400%;
-  animation: gradient 20s ease infinite;
+  animation: gradient 15s ease infinite;
 }
 
 @keyframes gradient {
@@ -39,19 +38,19 @@ header, footer {
 }
 
 h1 {
-  font-size: 60px;
+  font-size: 6vh;
   color: rgb(230 184 92);
   text-shadow: 2.7px 3px rgb(99 46 17);
 }
 
 button {
-  font-size: 30px;
-  padding: 20px 100px;
+  font-size: 2em;
+  padding: 1vh 10vh;
   text-transform: uppercase;
   border: 7px solid rgb(99 46 17);
   cursor: pointer;
   color: #e6b85c;
-  margin: 60px;
+  margin: 3vh;
   border-radius: 50px;
   font-size: 40px;
   background: linear-gradient(-45deg, #547016, #d2018f, #b36258);
@@ -68,11 +67,11 @@ button:hover {
 }
 
 
-.title-screen, .final-screen {
+.title-screen {
   background-image: url(assets/Pictures/homescreen\ ernesto.gif);
   background-size: 100%;
-  height: 800px;
-  width: 800px;
+  height: 82vh;
+  width: 82vh;
   position: relative;
   display: flex;
   justify-content: flex-start;
@@ -99,13 +98,13 @@ button:hover {
 }
 
 .grid {
-  background-image: url(assets/Pictures/sandborder.png);
+  background-image: url(assets/Pictures/nobk.png);
   background-color: rgba(78, 145, 184, 0.77);
   background-size: 100%;
   display: flex;
   flex-wrap: wrap;
-  height: 800px;
-  width: 800px;
+  height: 82vh;
+  width: 82vh;
   position: absolute;
   z-index: -2;
   /* border: 10px solid #98831a; */
@@ -120,13 +119,13 @@ button:hover {
   padding: 0px;
 }
 
-.shortCar {
+.shortObstacle {
   background-image: url(assets/Pictures/short_obstacle.gif);
   /* background-color: rgb(155, 89, 100); */
   background-size: 100%;
 }
 
-.shortSafe::after {
+.shortFloat::after {
   content: '';
   position: absolute;
   top: 0;
@@ -138,16 +137,16 @@ button:hover {
   z-index: -1;
 }
 
-.shortSafe {
+.shortFloat {
   position: relative;
 }
 
-.longCar {
+.longObstacle {
   background-image: url(assets/Pictures/obstacle\ 2.gif);
   background-size: 100%;
 }
 
-.longSafe::after {
+.longFloat::after {
   content: '';
   position: absolute;
   top: 0;
@@ -159,7 +158,7 @@ button:hover {
   z-index: -1;
 }
 
-.longSafe {
+.longFloat {
   position: relative;
 }
 
