@@ -1,7 +1,7 @@
 
 function init(){
 
-  //*-------------------------------------------------------------------------------------------------------MUSIC---------------------------------------------------------------------------------------------  
+  //*-------------------------------------------------------------------------------------------------------MUSIC------------------------------------------------------------------------------------------------------------------------------------------  
   const soundtrackAudio = document.querySelector('#soundtrackAudio')
   const safeAudio = document.querySelector('#safeAudio')
   const looseAudio = document.querySelector('#looseAudio')
@@ -42,7 +42,7 @@ function init(){
   let gameTime = 120
   let lives = 10
 
-  //*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
+  //*-------------------------------------------------------------------------------------------------------START GAME, TIMEBAR, GAMETIME INTERVAL--------------------------------------------------------------------------------------------  
 
   function startGame(){
 
@@ -70,7 +70,7 @@ function init(){
       }, 120000)
     }
     
-    //*-----------------------------------------------------------------------------------------------------THE GRID-----------------------------------------------------------------------------------------------  
+    //*-----------------------------------------------------------------------------------------------------THE GRID--------------------------------------------------------------------------------------------------------------------------------------------  
   
     const grid = document.querySelector('.grid')
     const width = 9
@@ -95,7 +95,7 @@ function init(){
 
     createGrid(startingPosition)
   
-    //*---------------------------------------------------------------------------------------------------ERNESTO-(THE OCTOPUS)------------------------------------------------------------------------------------------------  
+    //*------------------------------------------------------------------------------------------------ERNESTO-(THE OCTOPUS)---------------------------------------------------------------------------------------------------------------------------------------------  
   
     function addOctopus(position){
       cells[position].classList.add(octopus)
@@ -105,7 +105,7 @@ function init(){
       cells[position].classList.remove(octopus) 
     }
 
-    //*----------------------------------------------------------------------------------------------------MOVEMENT------------------------------------------------------------------------------------------------  
+    //*-------------------------------------------------------------------------------------------------MOVEMENT---------------------------------------------------------------------------------------------------------------------------------------------  
 
     function movement(event){
   
@@ -140,16 +140,14 @@ function init(){
       //*----------------------------------------------------------------------------------------------MOVEMENT FUNCTION:--TRACKING SAFE OCTOPUS------------------------------------------------------------------------------------------------  
       function safeOctopus(){
         const home = safeDen.some(el => el === currentPosition)
-        const allHome = safeDen.every(el => el === currentPosition)
         
         if (home){
           playSafeAudio()
           score += 100
           safe += 1
-          scoreTotal.innerHTML = score
           currentPosition = startingPosition   
           addOctopus(startingPosition)                   // add new octopus back to starting position, need to work out how to take control of the new one instead 
-        } else if (allHome){
+        } else if (safe > 4){
           winScreen()
         }
       }
@@ -158,7 +156,7 @@ function init(){
 
       function updateScore(){
         if (lives > 0){
-          scoreTotal.innerHTML = score
+          scoreTotal.innerHTML = `Score: ${score}`
         } else {
           return 
         }
@@ -180,7 +178,7 @@ function init(){
 
     function moveShort() {
 
-      function addShortFloat() {                                               // function to add short car
+      function addShortFloat() {                                               // function to add short float
         for (let i = 0; i < shortFloats.length; i++)
           cells[shortFloats[i]].classList.add(shortFloat)
       }
@@ -191,22 +189,22 @@ function init(){
       }
 
       function removeShortFloat() {
-        for (let i = 0; i < shortFloats.length; i++)                          // function to remove short car
+        for (let i = 0; i < shortFloats.length; i++)                          // function to remove short float
           cells[shortFloats[i]].classList.remove(shortFloat)
       }
       function removeShortObstacle() {
-        for (let i = 0; i < shortObstacles.length; i++)                       // function to remove short car
+        for (let i = 0; i < shortObstacles.length; i++)                       // function to remove short obstacle
           cells[shortObstacles[i]].classList.remove(shortObstacle)
       }
 
       addShortFloat()
       addShortObstacle()
 
-      setInterval(() => {                                                     // setting interval for cars to move
+      setInterval(() => {                                                     // setting interval for obstacles/floats to move
         removeShortObstacle()
         removeShortFloat()
 
-        shortFloats = shortFloats.map(el => {                               // mapping through array, if array meets condition sends car back to start of row
+        shortFloats = shortFloats.map(el => {                               // mapping through array, if array meets condition sends element back to start of row
           if (el % 11 === 0) {
             return el = el + 11
           } else {
@@ -214,7 +212,7 @@ function init(){
           }
         })
 
-        shortObstacles = shortObstacles.map(el => {                               // mapping through array, if array meets condition sends car back to start of row
+        shortObstacles = shortObstacles.map(el => {                           // mapping through array, if array meets condition sends element back to start of row
           if (el % 11 === 0) {
             return el = el + 11
           } else {
@@ -228,7 +226,7 @@ function init(){
         shortFloats = shortFloats.map(el => el -= 1)                  // adds 1 to index 
         shortObstacles = shortObstacles.map(el => el -= 1)  
         addShortObstacle()   
-        addShortFloat()                                               // adds class of short car to new index 
+        addShortFloat()                                               // adds class to new index 
         checkCollision()
 
       }, 2000                                                         // moving every 2 seconds 
@@ -240,7 +238,7 @@ function init(){
     
     function moveLong() {
 
-      function addLongFloat() {                                               // function to add short car
+      function addLongFloat() {                                              
         for (let i = 0; i < longFloats.length; i++)
           cells[longFloats[i]].classList.add(longFloat)
       }
@@ -251,23 +249,23 @@ function init(){
       }
 
       function removeLongFloat() {
-        for (let i = 0; i < longFloats.length; i++)                          // function to remove short car
+        for (let i = 0; i < longFloats.length; i++)                          
           cells[longFloats[i]].classList.remove(longFloat)
       }
 
       function removeLongObstacle() {
-        for (let i = 0; i < longObstacles.length; i++)                       // function to remove short car
+        for (let i = 0; i < longObstacles.length; i++)                       
           cells[longObstacles[i]].classList.remove(longObstacle)
       }
 
       addLongObstacle()
       addLongFloat()
 
-      setInterval(() => {                                                   // setting interval for cars to move
+      setInterval(() => {                                                   
         removeLongObstacle()
         removeLongFloat()
 
-        longFloats = longFloats.map(el => {                                 // mapping through array, if array meets condition sends car back to start of row
+        longFloats = longFloats.map(el => {                                 
           if (el % 11 === 10) {
             return el = el - 11
           } else {
@@ -286,13 +284,13 @@ function init(){
 
         removeLongObstacle()
         removeLongFloat()
-        longFloats = longFloats.map(el => el += 1)                // adds 1 to index 
+        longFloats = longFloats.map(el => el += 1)                
         longObstacles = longObstacles.map(el => el += 1)  
         addLongObstacle()   
-        addLongFloat()                                            // adds class of short car to new index 
+        addLongFloat()                                            
         checkCollision()
 
-      }, 1500                                                     // moving every 2 seconds 
+      }, 1500                                                     
       )
     }
   
@@ -312,8 +310,9 @@ function init(){
       const sameIndexShortFloat = shortFloats.some(el => el === currentPosition)
       const sameIndexLongFloat = longFloats.some(el => el === currentPosition)
 
-      const sameIndexShortPlusOne = shortFloats.some(el => el === currentPosition - 1)                      // checks to see for any instance of current position being same as short cars
+      const sameIndexShortMinusOne = shortFloats.some(el => el === currentPosition - 1)                      // checks to see for any instance of current position being same as short cars
       const sameIndexLongPlusOne = longFloats.some(el => el === currentPosition + 1)
+      // const sameIndexShortPlusOne = shortFloats.some(el => el === currentPosition + 2)               // trying to fix bug
       const onLand = land.some(el => el === currentPosition)
       const onWater = water.some(el => el === currentPosition)
 
@@ -331,33 +330,31 @@ function init(){
           removeOctopus(currentPosition)
           addOctopus(currentPosition)
           isInSquareBefore = true
-          console.log('move meh short', currentPosition)
-          isInSquareBefore
-          
+          // console.log('move meh short', currentPosition)
+
         } else if (sameIndexLongFloat) {
           removeOctopus(currentPosition)
           addOctopus(currentPosition)
           isInSquareAfter = true
-          console.log('move meh long', currentPosition)
-          isInSquareAfter
+          // console.log('move meh long', currentPosition)
 
-        } else if ((sameIndexShortPlusOne && isInSquareBefore === true)) {
+        } else if (sameIndexShortMinusOne && isInSquareBefore === true) {
           removeOctopus(currentPosition)
           currentPosition -= 1
-          console.log('floaty boi', currentPosition)
           addOctopus(currentPosition)
+          // console.log('floaty boi', currentPosition)
 
-        } else if ((sameIndexLongPlusOne && isInSquareAfter === true)) {
+        } else if (sameIndexLongPlusOne && isInSquareAfter === true) {
           removeOctopus(currentPosition)
           currentPosition += 1
-          console.log('floaty boi', currentPosition)
           addOctopus(currentPosition)
+          // console.log('floaty boi long', currentPosition)
           
         } else {
           looseLife()
           isInSquareBefore = false
-          console.log('drown town', currentPosition)
           isInSquareBefore
+          // console.log('drown town', currentPosition)
         }
 
       } else {
