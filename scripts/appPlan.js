@@ -15,31 +15,19 @@ function init(){
   //addCar(cell position), addLongCar(cell position)
   //add classes for waterCar or landCar to the cars dependent on the row (use the indexes) as how the octopus interacts with them changes depending on which half of the grid we're on
   //for later styling, access longCar or shortCar with class of water or land, or use their indexes etc if I want to use lots of different images (we'll see haha!)
-
-
-
-//*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
+//*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
 //* create movement!
   // here will be the function/ if else statements for mapping the arrow keys to the movement of the octopus 
-
-
-
 //*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
 //* audio
   // I don't want the music to restart every single time you die, that would be annoying? Maybe a function that plays the audio when the play button is clicked 
   // I will create an if statement 
   // If start button is pressed play main song
-
-
-
-
 //*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
 //* game begins - this is the page that will listen for the click of the button, regardless of what innerHTML says
 let gameTime = 120000    // full time bar OR clock, this is going to count backwards
 let lives = 3
 let safe = 0
-
-
 function startGame(){
   // put gametime, lives and safe in here so it resets
   // titleScreen display none 
@@ -48,14 +36,7 @@ function startGame(){
   // if gameTime === 0 trigger gameLoose 
     // it will be linked to a bar that displays on the page and counts down the time for the player
 }
-
 playBtn.addEventListener('click', startGame)
-
-
-
-
-
-
 //*----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------  
 //* gamePlay - this will determine what happens as the game is played!
 let score = 0 

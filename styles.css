@@ -5,6 +5,7 @@
   font-family: 'Ultra', serif;
   letter-spacing: 5px;
   color: rgb(230 184 92);
+  font-size: 3vh;
 }
 
 body {
@@ -21,9 +22,11 @@ body {
   0% {
   background-position: 0% 50%;
   }
+
   50% {
   background-position: 100% 50%;
   }
+
   100% {
   background-position: 0% 50%;
   }
@@ -41,6 +44,15 @@ h1 {
   font-size: 6vh;
   color: rgb(230 184 92);
   text-shadow: 2.7px 3px rgb(99 46 17);
+}
+
+p {
+  margin: 0px 20px;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
 }
 
 button {
@@ -66,7 +78,6 @@ button:hover {
   text-shadow: 5px 5px rgba(230, 225, 65, 0.2);
 }
 
-
 .title-screen {
   background-image: url(assets/Pictures/homescreen\ ernesto.gif);
   background-size: 100%;
@@ -78,17 +89,32 @@ button:hover {
   padding-top: 90px;
   align-items: center;
   flex-direction: column;
-  /* box-shadow: 10px -7px 5px rgb(153,158,158, 0.6); */
   border: 7px solid rgb(99 46 17);
   border-radius: 50px;
 }
 
-#loosescreen {
-  background-image: url(assets/Pictures/loosescreen.gif);
-  background-size: 100%;
+.info {
+  visibility: hidden;
 }
 
+.info {
+  background-color: #ecd2a2f2;
+  margin: 60px;
+  color: #632e11;
+  height: 100vh;
+  width: 70vh;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 26px;
+  border: 7px solid rgb(99 46 17);
+  font-size: 2.6vh;
+}
 
+button:hover + .info {
+  visibility: visible;
+}
 
 .grid-wrapper {
   height: 85vh;
@@ -107,7 +133,6 @@ button:hover {
   width: 82vh;
   position: absolute;
   z-index: -2;
-  /* border: 10px solid #98831a; */
   border-radius: 50px;
   box-shadow: 1px 2px 3px rgba(99, 117, 189, 0.393);
 }
@@ -121,7 +146,6 @@ button:hover {
 
 .shortObstacle {
   background-image: url(assets/Pictures/short_obstacle.gif);
-  /* background-color: rgb(155, 89, 100); */
   background-size: 100%;
 }
 
@@ -184,7 +208,3 @@ button:hover {
   transition: width .5s, border-radius 0.2s ease 0.2s;
 }
 
-footer {
-  display: flex;
-  justify-content: space-evenly;
-}

@@ -23,7 +23,7 @@ function init(){
 
   //*-----------------------------------------------------------------------------------------------------ARRAYS, QUERY SELECTORS, LETS, CONSTS--------------------------------------------------------------------------------------------  
 
-  let shortObstacles = [56, 59, 62, 65, 79, 81, 83, 85, 87]
+  let shortObstacles = [56, 59, 62, 65, 77, 80, 83, 86]
   let longObstacles = [66, 67, 70, 71, 74, 75]
   let shortFloats = [12, 15, 18, 21, 33, 36, 39, 41]
   let longFloats = [23, 24, 27, 28, 30, 31]
@@ -35,6 +35,7 @@ function init(){
   const titleScreen = document.querySelector('.title-screen-wrapper')
   const title = document.querySelector('.title')
   const titlePicture = document.querySelector('.title-screen')
+  const info = document.querySelector('.info')
 
   let score = 0
   let safe = 0 
@@ -54,6 +55,7 @@ function init(){
     playMusic()
 
     titleScreen.style.display = 'none'
+    info.style.display = 'none'
     
     if (gameTime > 0){
       setInterval(() => {
@@ -138,6 +140,8 @@ function init(){
       //*----------------------------------------------------------------------------------------------MOVEMENT FUNCTION:--TRACKING SAFE OCTOPUS------------------------------------------------------------------------------------------------  
       function safeOctopus(){
         const home = safeDen.some(el => el === currentPosition)
+        const allHome = safeDen.every(el => el === currentPosition)
+        
         if (home){
           playSafeAudio()
           score += 100
@@ -145,7 +149,7 @@ function init(){
           scoreTotal.innerHTML = score
           currentPosition = startingPosition   
           addOctopus(startingPosition)                   // add new octopus back to starting position, need to work out how to take control of the new one instead 
-        } else if (safe > 4){
+        } else if (allHome){
           winScreen()
         }
       }
@@ -210,14 +214,14 @@ function init(){
           }
         })
 
-        shortObstacles = shortObstacles.map(el => { 
-
+        shortObstacles = shortObstacles.map(el => {                               // mapping through array, if array meets condition sends car back to start of row
           if (el % 11 === 0) {
             return el = el + 11
           } else {
             return el
           }
         })
+
 
         removeShortObstacle()
         removeShortFloat()
@@ -288,7 +292,7 @@ function init(){
         addLongFloat()                                            // adds class of short car to new index 
         checkCollision()
 
-      }, 1000                                                     // moving every 2 seconds 
+      }, 1500                                                     // moving every 2 seconds 
       )
     }
   
@@ -361,7 +365,7 @@ function init(){
       }
     }
 
-    //*--------------------------------------------------------------------------------------------------------------LOOSE LIFE-------------------------------------------------------------------------------------------------  
+    //*--------------------------------------------------------------------------------------------------------------LOOSE LIFE--------------------------------------------------------------------------------------------------------------  
 
     function looseLife(){
       if (lives >= 1){
