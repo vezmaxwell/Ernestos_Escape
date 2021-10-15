@@ -9,8 +9,6 @@ The original game character is a frog who must dodge the traffic on the bottom h
 Ernesto's Escape uses an octopus who must dodge the carnivorous fish on the bottom half and then manouvere the currents on the shells on the top half of the screen to reach a clam bed.
 He can move in any direction, and moves with the objects that floats if he is on them.
 
-**Demo**
-
 **Technologies Used**
 
  - HTML5
@@ -18,9 +16,6 @@ He can move in any direction, and moves with the objects that floats if he is on
  - JavaScript ES6
  - Google Fonts 
  - Procreate
-
-**Planning**
-*insert screenshot*
 
 **Day 1**
 
