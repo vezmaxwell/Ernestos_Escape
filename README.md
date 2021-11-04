@@ -2,9 +2,11 @@
 ## **Project 1: Ernesto's Escape**
 
 **Overview**
+
 Ernesto's Esacpe is a take on the classic game of Frogger. I had been wanting to make a little octopus character for a game and thought Frogger would fit the idea therefore bringing Ernesto alive for my first project.
 
 **Gameplay**
+
 The original game character is a frog who must dodge the traffic on the bottom half of the screen and then use the floats on the top half of the screen to reach safety. 
 Ernesto's Escape uses an octopus who must dodge the carnivorous fish on the bottom half and then manouvere the currents on the shells on the top half of the screen to reach a clam bed.
 He can move in any direction, and moves with the objects that floats if he is on them.
