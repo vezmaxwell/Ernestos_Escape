@@ -1,15 +1,13 @@
-
 ## **Project 1: Ernesto's Escape**
+
+<img width="899" alt="Screenshot 2021-11-04 at 13 42 54" src="https://user-images.githubusercontent.com/81028718/140324049-cdcd73bd-18b7-4884-88b0-53a3ae8a1498.png">
+
 
 **Overview**
 
-Ernesto's Esacpe is a take on the classic game of Frogger. I had been wanting to make a little octopus character for a game and thought Frogger would fit the idea therefore bringing Ernesto alive for my first project.
+The aim of this first project was to code a classic game using vanilla JavaScript, HTML and CSS. I chose to create adaptation of Frogger - Ernesto's Escape. Ernesto the octopus would need to dodge the fish on the bottom half of the screen and then use the coral and seaweed on the top half to float to safety in the clam beds.
 
-**Gameplay**
-
-The original game character is a frog who must dodge the traffic on the bottom half of the screen and then use the floats on the top half of the screen to reach safety. 
-Ernesto's Escape uses an octopus who must dodge the carnivorous fish on the bottom half and then manouvere the currents on the shells on the top half of the screen to reach a clam bed.
-He can move in any direction, and moves with the objects that floats if he is on them.
+<img width="952" alt="Screenshot 2021-11-04 at 13 41 59" src="https://user-images.githubusercontent.com/81028718/140323892-a8a86700-5c18-4d91-a002-17c45692bdff.png">
 
 **Technologies Used**
 
@@ -18,6 +16,12 @@ He can move in any direction, and moves with the objects that floats if he is on
  - JavaScript ES6
  - Google Fonts 
  - Procreate
+
+**Planning**
+
+I began by planning out how I wanted to write the code. This included what variables I would want and what my functions would do, as well as where I might call them. I sectioned off each part of my plan and would work through these. I found the plan extremely beneficial as a new coder as it gave me some grounding to look back at if I got confused about where I was whenever I moved between sections to work on.
+
+<img width="1047" alt="Screenshot 2021-11-04 at 13 40 00" src="https://user-images.githubusercontent.com/81028718/140323562-7bc99fd9-486e-4937-9b7a-3b8780693a98.png">
 
 **Day 1**
 
@@ -131,7 +135,7 @@ After really hitting a wall with a weekend of some problems, I decided to spend 
 
 **Day 6 **
 
-Day 6 involved a lot of trouble shooting. Eventually a solution was reached with moving the octopus on the floats. However, I also needed a solution in order to style the obstacles and floats different, as the same function was making them move. This involved writing new functions and adding classes to separate out the obstacles from the floats, yet call them in the same function for movement. The code was an extension of the code snippet from day 2, repeating in order to assign new classes in order to style the floats and obstacles differently. This unfortunately created a new problem with the octopus on the floats, as now new arrays had been added in order for the classlists to work. The function to make him float needed to be edited again. 
+Day 6 involved a lot of trouble shooting. Eventually a solution was reached with moving the octopus on the floats. However, I also needed a solution in order to style the obstacles and floats different, as the same function was making them move. This involved writing new functions and adding classes to separate out the obstacles from the floats, yet call them in the same function for movement. The code was an extension of the code snippet from day 2, repeating in order to assign new classes in order to style the floats and obstacles differently. This unfortunately created a new problem with the octopus on the floats, as now new arrays had been added in order for the class lists to work. The function to make him float needed to be edited again. 
 
 The following code snippet shows the arrays, which were previously just 2. These represent the starting indexes of the obstacles and floats which are updated in the function that creates and moves them. 
 
@@ -162,3 +166,9 @@ Thursday was for the final bits of css and trying to fix some minor bugs.  I tid
 As the game started out with the idea of the original Frogger game where he is on land, my variable names reflected that. However, I made mine completely underwater when I started styling it. The variable names no longer made sense! I kept them during the build and changed them at the end.  
 
 I added some game information that popped up when you hovered over the play button.
+
+<img width="861" alt="Screenshot 2021-11-04 at 13 44 39" src="https://user-images.githubusercontent.com/81028718/140324376-ef3171ee-b173-44bd-b4e1-e45045eed402.png">
+
+**Strengths and issues**
+
+I really enjoyed making this game and was proud of it as a first game. Being my first project, I definitely found it quite stressful especially with no mark of how well (or poorly!) it was going. I think a big take away from this project was to step away from a problem if I couldn't work it out, work on something else and come back later, as sometimes a problem was just overlooked. 
