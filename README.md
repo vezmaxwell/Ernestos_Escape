@@ -6,7 +6,7 @@
 
 **Overview**
 
-The aim of this first project was to code a classic game using vanilla JavaScript, HTML and CSS. I chose to create adaptation of Frogger - Ernesto's Escape. Ernesto the octopus would need to dodge the fish on the bottom half of the screen and then use the coral and seaweed on the top half to float to safety in the clam beds.
+The brief for this first project was to code a classic game using Vanilla JavaScript, HTML and CSS. I chose to create adaptation of Frogger - Ernesto's Escape. Ernesto the octopus would need to dodge the fish on the bottom half of the screen and then use the coral and seaweed on the top half to float to safety in the clam beds.
 
 <img width="952" alt="Screenshot 2021-11-04 at 13 41 59" src="https://user-images.githubusercontent.com/81028718/140323892-a8a86700-5c18-4d91-a002-17c45692bdff.png">
 
@@ -172,7 +172,7 @@ On Wednesday I managed to fix function which in turn allowed the octopus to floa
 
 **Day 8**
 
-Thursday was for the final bits of css and trying to fix some minor bugs.  I tidied up the code, took out unnecessary console logs and renamed some variables that no longer made sense. 
+Thursday was for the final bits of CSS and trying to fix some minor bugs.  I tidied up the code, took out unnecessary console logs and renamed some variables that no longer made sense. 
 
 As the game started out with the idea of the original Frogger game where he is on land, my variable names reflected that. However, I made mine completely underwater when I started styling it. The variable names no longer made sense! I kept them during the build and changed them at the end.  
 
@@ -183,4 +183,4 @@ I added some game information that popped up when you hovered over the play butt
 
 **Strengths and issues**
 
-I really enjoyed making this game and was proud of it as a first game. Being my first project, I definitely found it quite stressful especially with no mark of how well (or poorly!) it was going. I think a big take away from this project was to step away from a problem if I couldn't work it out, work on something else and come back later, as sometimes a problem was just overlooked. 
+I really enjoyed making this game and was proud of it as a first game. Being my first project, I definitely found it quite stressful especially with no mark of how well (or poorly!) it was going. I think a big take away from this project was to step away from a problem if I couldn't work it out, work on something else and come back later, as sometimes a problem was just overlooked. If I were to re-create the game I would make use of JavaScript classes. I think this would have avoided repition I ended up with in my code. I would also have liked to come up with a more streamlined way of keeping the octopus floating on the items on the top half of the screen. I was left with one small bug that meant sometimes he jumps to the square to the left, which perhaps could have been more easily ironed out with more streamlined code in that section.
